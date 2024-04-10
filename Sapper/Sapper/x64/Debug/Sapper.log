@@ -1,0 +1,10 @@
+﻿  Cell.cpp
+  Console.cpp
+C:\Projects in VS\Sapper\Sapper\Console.cpp(6,14): warning C4838: Преобразование из "int" в "SHORT" требует сужающего преобразования.
+C:\Projects in VS\Sapper\Sapper\Console.cpp(6,17): warning C4838: Преобразование из "int" в "SHORT" требует сужающего преобразования.
+  Game.cpp
+  Map.cpp
+  Sapper.cpp
+C:\Projects in VS\Sapper\Sapper\Sapper.cpp(21,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Создание кода...
+  Sapper.vcxproj -> C:\Projects in VS\Sapper\x64\Debug\Sapper.exe
