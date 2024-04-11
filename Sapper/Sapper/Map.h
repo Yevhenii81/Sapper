@@ -11,10 +11,10 @@ private:
 	friend class Cell;
 	friend class Game;
 
-	bool isGameWon;  //переменная для отслеживания выиграша
-	vector<vector<int>> map;  //двумерный вектор для игрового поля
-	vector<vector<int>> mask;  //двумерный вектор для маски игрового поля
-	HANDLE h;  //дескриптор для работы с консолью
+	bool isGameWon;  //РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ РІС‹РёРіСЂР°С€Р°
+	vector<vector<int>> map;  //РґРІСѓРјРµСЂРЅС‹Р№ РІРµРєС‚РѕСЂ РґР»СЏ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
+	vector<vector<int>> mask;  //РґРІСѓРјРµСЂРЅС‹Р№ РІРµРєС‚РѕСЂ РґР»СЏ РјР°СЃРєРё РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
+	HANDLE h;  //РґРµСЃРєСЂРёРїС‚РѕСЂ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РєРѕРЅСЃРѕР»СЊСЋ
 public:
 	/*Map(int w, int h) : width(w), height(h), h(GetStdHandle(STD_OUTPUT_HANDLE))
 	{
@@ -24,42 +24,43 @@ public:
 
 	Map();
 
-	void setWidth(int w);
-	int getWidth() const;
-	void setHeight(int h);
-	int getHeight() const;
-	void setIsGameWon(bool value);
-	bool getIsGameWon() const;
-	void setMap(const std::vector<std::vector<int>>& newMap);
-	std::vector<std::vector<int>> getMap() const;
-	void setMask(const std::vector<std::vector<int>>& newMask);
-	std::vector<std::vector<int>> getMask() const;
-	void setHandle(HANDLE newHandle);
-	HANDLE getHandle() const;
+	void SetWidth(int w);
+	void SetHeight(int h);
+	void SetIsGameWon(bool value);
+	void SetMap(const vector<vector<int>>& newMap);
+	void SetMask(const vector<vector<int>>& newMask);
+	void SetHandle(HANDLE newHandle);
 
-	//метод для инициализации игрового поля
+	int GetWidth() const;
+	int GetHeight() const;
+	bool GetIsGameWon() const;
+	vector<vector<int>> GetMap() const;
+	vector<vector<int>> GetMask() const;
+	HANDLE GetHandle() const;
+
+	//РјРµС‚РѕРґ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 	void InitializeMap();
 
-	//метод для отображения игрового поля
+	//РјРµС‚РѕРґ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 	void PrintMap();
 
-	//метод для расстановки чисел на игровом поле
+	//РјРµС‚РѕРґ РґР»СЏ СЂР°СЃСЃС‚Р°РЅРѕРІРєРё С‡РёСЃРµР» РЅР° РёРіСЂРѕРІРѕРј РїРѕР»Рµ
 	void NumberSetting();
 
-	//метод для инициализации маски (состояние ячеек)
+	//РјРµС‚РѕРґ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РјР°СЃРєРё (СЃРѕСЃС‚РѕСЏРЅРёРµ СЏС‡РµРµРє)
 	void InitializeMask();
 
-	//метод для открытия ячейки и обновления маски
+	//РјРµС‚РѕРґ РґР»СЏ РѕС‚РєСЂС‹С‚РёСЏ СЏС‡РµР№РєРё Рё РѕР±РЅРѕРІР»РµРЅРёСЏ РјР°СЃРєРё
 	int OpenCell(int x, int y);
 
-	//метод для проверки выиграша в игре
+	//РјРµС‚РѕРґ РґР»СЏ РїСЂРѕРІРµСЂРєРё РІС‹РёРіСЂР°С€Р° РІ РёРіСЂРµ
 	bool CheckGameWon();
 
-	//метод для заливки пустой области на игровом поле
-	//используется стек для хранения координат ячеек для заливки
-	//обновляем маску поля и отображаем изменения на экране
+	//РјРµС‚РѕРґ РґР»СЏ Р·Р°Р»РёРІРєРё РїСѓСЃС‚РѕР№ РѕР±Р»Р°СЃС‚Рё РЅР° РёРіСЂРѕРІРѕРј РїРѕР»Рµ
+	//РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ СЃС‚РµРє РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РєРѕРѕСЂРґРёРЅР°С‚ СЏС‡РµРµРє РґР»СЏ Р·Р°Р»РёРІРєРё
+	//РѕР±РЅРѕРІР»СЏРµРј РјР°СЃРєСѓ РїРѕР»СЏ Рё РѕС‚РѕР±СЂР°Р¶Р°РµРј РёР·РјРµРЅРµРЅРёСЏ РЅР° СЌРєСЂР°РЅРµ
 	void Fill(int px, int py, Map& map);
 
-	// метод для установки флага на игровом поле
+	// РјРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё С„Р»Р°РіР° РЅР° РёРіСЂРѕРІРѕРј РїРѕР»Рµ
 	void PlaceFlag(int x, int y);
 };
