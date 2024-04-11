@@ -3,25 +3,67 @@
 
 Map::Map() : width(0), height(0), isGameWon(false), h(GetStdHandle(STD_OUTPUT_HANDLE)) {}
 
-void Map::setWidth(int w) { width = w; }
-int Map::getWidth() const { return width; }
+void Map::SetWidth(int w)
+{ 
+	width = w; 
+}
 
-void Map::setHeight(int h) { height = h; }
-int Map::getHeight() const { return height; }
+void Map::SetHeight(int h)
+{
+	height = h;
+}
 
-void Map::setIsGameWon(bool value) { isGameWon = value; }
-bool Map::getIsGameWon() const { return isGameWon; }
+void Map::SetIsGameWon(bool value)
+{
+	isGameWon = value;
+}
 
-void Map::setMap(const std::vector<std::vector<int>>& newMap) { map = newMap; }
-std::vector<std::vector<int>> Map::getMap() const { return map; }
+void Map::SetMap(const vector<vector<int>>& newMap)
+{
+	map = newMap;
+}
 
-void Map::setMask(const std::vector<std::vector<int>>& newMask) { mask = newMask; }
-std::vector<std::vector<int>> Map::getMask() const { return mask; }
+void Map::SetMask(const vector<vector<int>>& newMask)
+{
+	mask = newMask;
+}
 
-void Map::setHandle(HANDLE newHandle) { h = newHandle; }
-HANDLE Map::getHandle() const { return h; }
+void Map::SetHandle(HANDLE newHandle)
+{
+	h = newHandle;
+}
 
-//метод для инициализации игрового поля
+int Map::GetWidth() const 
+{ 
+	return width; 
+}
+
+int Map::GetHeight() const 
+{ 
+	return height; 
+}
+
+bool Map::GetIsGameWon() const 
+{ 
+	return isGameWon; 
+}
+
+vector<vector<int>> Map::GetMap() const 
+{
+	return map;
+}
+
+vector<vector<int>> Map::GetMask() const 
+{ 
+	return mask; 
+}
+
+HANDLE Map::GetHandle() const 
+{ 
+	return h; 
+}
+
+//РјРµС‚РѕРґ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 void Map::InitializeMap()
 {
 	for (int i = 0; i < width; i++)
@@ -42,7 +84,7 @@ void Map::InitializeMap()
 	}
 }
 
-//метод для отображения игрового поля
+//РјРµС‚РѕРґ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 void Map::PrintMap()
 {
 	Options(0, 0);
@@ -53,28 +95,28 @@ void Map::PrintMap()
 			if (mask[j][i] == HALL)
 			{
 				//SetConsoleTextAttribute(h, BLACK);
-				cout << "."; //маска
+				cout << "."; //РјР°СЃРєР°
 				continue;
 			}
 
 			if (map[j][i] == WALL)
 			{
 				SetConsoleTextAttribute(h, WHITE);
-				cout << (char)178; // стена
+				cout << (char)178; // СЃС‚РµРЅР°
 			}
 			else if (mask[j][i] == 2)
 			{
-				cout << "!"; //флаг
+				cout << "!"; //С„Р»Р°Рі
 			}
 			else if (map[j][i] == HALL)
 			{
 				SetConsoleTextAttribute(h, BLACK);
-				cout << " "; // коридор
+				cout << " "; // РєРѕСЂРёРґРѕСЂ
 			}
 			else if (map[j][i] == MINE)
 			{
 				SetConsoleTextAttribute(h, GREEN);
-				cout << "*"; //мина
+				cout << "*"; //РјРёРЅР°
 			}
 			else
 			{
@@ -87,7 +129,7 @@ void Map::PrintMap()
 	}
 }
 
-//метод для расстановки чисел на игровом поле
+//РјРµС‚РѕРґ РґР»СЏ СЂР°СЃСЃС‚Р°РЅРѕРІРєРё С‡РёСЃРµР» РЅР° РёРіСЂРѕРІРѕРј РїРѕР»Рµ
 void Map::NumberSetting()
 {
 	for (int i = 1; i < width - 1; i++)
@@ -111,7 +153,7 @@ void Map::NumberSetting()
 	}
 }
 
-//метод для инициализации маски (состояние ячеек)
+//РјРµС‚РѕРґ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РјР°СЃРєРё (СЃРѕСЃС‚РѕСЏРЅРёРµ СЏС‡РµРµРє)
 void Map::InitializeMask()
 {
 	for (int i = 0; i < width; i++)
@@ -132,7 +174,7 @@ void Map::InitializeMask()
 	}
 }
 
-//метод для открытия ячейки и обновления маски
+//РјРµС‚РѕРґ РґР»СЏ РѕС‚РєСЂС‹С‚РёСЏ СЏС‡РµР№РєРё Рё РѕР±РЅРѕРІР»РµРЅРёСЏ РјР°СЃРєРё
 int Map::OpenCell(int x, int y)
 {
 	if (mask[x][y] == HALL)
@@ -166,7 +208,7 @@ int Map::OpenCell(int x, int y)
 	return -1;
 }
 
-//метод для проверки выиграша в игре
+//РјРµС‚РѕРґ РґР»СЏ РїСЂРѕРІРµСЂРєРё РІС‹РёРіСЂР°С€Р° РІ РёРіСЂРµ
 bool Map::CheckGameWon()
 {
 	for (int i = 1; i < width - 1; i++)
@@ -174,16 +216,16 @@ bool Map::CheckGameWon()
 		for (int j = 1; j < height - 1; j++)
 		{
 			if (map[i][j] != MINE && mask[i][j] != 1) {
-				return false; //если есть незамаскированные ячейки, игра не выиграна
+				return false; //РµСЃР»Рё РµСЃС‚СЊ РЅРµР·Р°РјР°СЃРєРёСЂРѕРІР°РЅРЅС‹Рµ СЏС‡РµР№РєРё, РёРіСЂР° РЅРµ РІС‹РёРіСЂР°РЅР°
 			}
 		}
 	}
-	return true; //все незамаскированные ячейки без мин, игра выиграна
+	return true; //РІСЃРµ РЅРµР·Р°РјР°СЃРєРёСЂРѕРІР°РЅРЅС‹Рµ СЏС‡РµР№РєРё Р±РµР· РјРёРЅ, РёРіСЂР° РІС‹РёРіСЂР°РЅР°
 }
 
-//метод для заливки пустой области на игровом поле
-//используется стек для хранения координат ячеек для заливки
-//обновляем маску поля и отображаем изменения на экране
+//РјРµС‚РѕРґ РґР»СЏ Р·Р°Р»РёРІРєРё РїСѓСЃС‚РѕР№ РѕР±Р»Р°СЃС‚Рё РЅР° РёРіСЂРѕРІРѕРј РїРѕР»Рµ
+//РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ СЃС‚РµРє РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РєРѕРѕСЂРґРёРЅР°С‚ СЏС‡РµРµРє РґР»СЏ Р·Р°Р»РёРІРєРё
+//РѕР±РЅРѕРІР»СЏРµРј РјР°СЃРєСѓ РїРѕР»СЏ Рё РѕС‚РѕР±СЂР°Р¶Р°РµРј РёР·РјРµРЅРµРЅРёСЏ РЅР° СЌРєСЂР°РЅРµ
 void Map::Fill(int px, int py, Map& map)
 {
 	stack<int> stk;
@@ -261,20 +303,20 @@ void Map::Fill(int px, int py, Map& map)
 			break;
 		}
 	}
-	PrintMap(); //распечатка обновленной карты
+	PrintMap(); //СЂР°СЃРїРµС‡Р°С‚РєР° РѕР±РЅРѕРІР»РµРЅРЅРѕР№ РєР°СЂС‚С‹
 }
 
-// метод для установки флага на игровом поле
+// РјРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё С„Р»Р°РіР° РЅР° РёРіСЂРѕРІРѕРј РїРѕР»Рµ
 void Map::PlaceFlag(int x, int y)
 {
-	if (mask[y][x] == HALL) //проверяем, что ячейка еще не открыта
+	if (mask[y][x] == HALL) //РїСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ СЏС‡РµР№РєР° РµС‰Рµ РЅРµ РѕС‚РєСЂС‹С‚Р°
 	{
-		mask[y][x] = 2; //устанавливаем флаг
-		PrintMap(); //обновляем экран после установки флага
+		mask[y][x] = 2; //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С„Р»Р°Рі
+		PrintMap(); //РѕР±РЅРѕРІР»СЏРµРј СЌРєСЂР°РЅ РїРѕСЃР»Рµ СѓСЃС‚Р°РЅРѕРІРєРё С„Р»Р°РіР°
 	}
-	else if (mask[y][x] == 2) //если в ячейке уже установлен флаг
+	else if (mask[y][x] == 2) //РµСЃР»Рё РІ СЏС‡РµР№РєРµ СѓР¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ С„Р»Р°Рі
 	{
-		mask[y][x] = HALL; //убираем флаг, восстанавливаем маску
-		PrintMap(); //обновляем экран после удаления флага
+		mask[y][x] = HALL; //СѓР±РёСЂР°РµРј С„Р»Р°Рі, РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РјР°СЃРєСѓ
+		PrintMap(); //РѕР±РЅРѕРІР»СЏРµРј СЌРєСЂР°РЅ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ С„Р»Р°РіР°
 	}
 }
